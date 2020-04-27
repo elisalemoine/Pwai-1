@@ -1,0 +1,25 @@
+function setup() {
+  createCanvas(400,400);
+  background(250,200,0);
+  var button = createButton('suce ma teuch');
+  
+  button.mousePressed(saveMyCanva);
+}
+
+function draw() {
+  
+  if (mouseIsPressed) {
+    noStroke();
+    
+    fill(random(150, 250), random(150, 250), random(150, 250));
+    
+    var size = random(20, 50);
+    ellipse (mouseX, mouseY, size, size*2);
+  
+  }
+}
+
+function saveMyCanva() {
+  saveCanvas('myCanva', 'png');
+
+}
