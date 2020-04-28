@@ -1,23 +1,52 @@
+//initialize the mode 
+var state ='squaremode'; 
+
 function setup() {
   createCanvas(400,400);
-  background(250,200,0);
+  background(250,200,150);
   
-  var button = createButton('suce ma teuch');
+  //create our first button 
+  var button = createButton('enregistrer image');
   button.mousePressed(saveMyCanva);
+  
+  //create our second button 
+  var button2 = createButton('changer forme'); 
+  button2.mousePressed(switchForm); 
 }
 
 function draw() {
   
+  var size = random(20, 50);
+  
   if (mouseIsPressed) {
     noStroke();
     
-    fill(random(150, 250), random(150, 250), random(150, 250));
+    //draw ellipse when ellipsemode active
+    if (state == 'ellipsemode') {
+      fill(0, 0, random(150, 250));
+      ellipse (mouseX, mouseY, size, size*2);
+    }
     
-    var size = random(20, 50);
-    ellipse (mouseX, mouseY, size, size*2);
+    //draw square when squaremode active 
+    if (state == 'squaremode') {
+      fill(0, random(150,250), 0);
+      square (mouseX-size/2, mouseY-size/2, size);
+    } 
   }
 }
 
+//save the canva after drawing 
 function saveMyCanva() {
   saveCanvas('myCanva', 'png');
+}
+ 
+//change the form you want to draw in 
+function switchForm() {
+  if (state == 'ellipsemode') {
+    state = 'squaremode';
+  }
+  
+  if (state == 'squaremode') {
+    state = 'ellipsemode';
+  }
 }
